@@ -131,27 +131,46 @@ st.set_page_config(
 def run():
     
     # (Logo, Heading, Sidebar etc)
-    img = Image.open('./Logo/RESUM.png')
-    st.image(img)
-    st.sidebar.markdown("# Choose Something...")
-    activities = ["User", "Feedback", "About", "Admin"]
-    choice = st.sidebar.selectbox("Choose among the given options:", activities)
-    link = '<b>Built with 🤍 by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: #021659;">Deepak Padhi</a></b>' 
-    st.sidebar.markdown(link, unsafe_allow_html=True)
-    st.sidebar.markdown('''
-        <!-- site visitors -->
+   # ---------- MODERN HEADER ----------
 
-        <div id="sfct2xghr8ak6lfqt3kgru233378jya38dy" hidden></div>
+st.markdown("""
+<h1 style='text-align:center; color:#4F46E5;'>
+🚀 AI Resume Analyzer
+</h1>
 
-        <noscript>
-            <a href="https://www.freecounterstat.com" title="hit counter">
-                <img src="https://counter9.stat.ovh/private/freecounterstat.php?c=t2xghr8ak6lfqt3kgru233378jya38dy" border="0" title="hit counter" alt="hit counter"> -->
-            </a>
-        </noscript>
-    
-        <p>Visitors <img src="https://counter9.stat.ovh/private/freecounterstat.php?c=t2xghr8ak6lfqt3kgru233378jya38dy" title="Free Counter" Alt="web counter" width="60px"  border="0" /></p>
-    
-    ''', unsafe_allow_html=True)
+<p style='text-align:center; font-size:18px; color:gray;'>
+Upload your resume, get skill analysis, resume scoring,
+career recommendations and learning resources.
+</p>
+
+<hr>
+""", unsafe_allow_html=True)
+
+# ---------- SIDEBAR ----------
+
+st.sidebar.title("Navigation")
+
+activities = ["User", "Feedback", "About", "Admin"]
+choice = st.sidebar.radio(
+    "Select Section",
+    activities
+)
+
+st.sidebar.markdown("---")
+st.sidebar.info(
+"""
+👩‍💻 Resume Analysis
+
+📊 Resume Score
+
+🎯 Career Prediction
+
+📚 Course Recommendations
+"""
+)
+
+st.sidebar.markdown("---")
+st.sidebar.caption("Developed by Sindhu Lasya")
 
     ###### Creating Database and Table ######
 
@@ -213,9 +232,15 @@ def run():
     if choice == 'User':
         
         # Collecting Miscellaneous Information
-        act_name = st.text_input('Name*')
-        act_mail = st.text_input('Mail*')
-        act_mob  = st.text_input('Mobile Number*')
+       col1, col2 = st.columns(2)
+
+with col1:
+    act_name = st.text_input("👤 Full Name")
+
+with col2:
+    act_mail = st.text_input("📧 Email")
+
+act_mob = st.text_input("📱 Mobile Number")
         sec_token = secrets.token_urlsafe(12)
         host_name = socket.gethostname()
         ip_add = socket.gethostbyname(host_name)
@@ -248,7 +273,8 @@ def run():
             pdf_name = pdf_file.name
             with open(save_image_path, "wb") as f:
                 f.write(pdf_file.getbuffer())
-            show_pdf(save_image_path)
+            with st.expander("📄 View Uploaded Resume"):
+    show_pdf(save_image_path)
 
             ### parsing and extracting whole resume 
             resume_data = ResumeParser(save_image_path).get_extracted_data()
@@ -258,9 +284,13 @@ def run():
                 resume_text = pdf_reader(save_image_path)
 
                 ## Showing Analyzed data from (resume_data)
-                st.header("**Resume Analysis 🤘**")
-                st.success("Hello "+ resume_data['name'])
-                st.subheader("**Your Basic info 👀**")
+               st.markdown("""
+## 📊 Resume Analysis Dashboard
+""")
+               st.success(
+    f"Welcome {resume_data['name']} 🎉"
+)
+               st.subheader("👤 Candidate Information")
                 try:
                     st.text('Name: '+resume_data['name'])
                     st.text('Email: ' + resume_data['email'])
@@ -650,11 +680,7 @@ def run():
             It will load all the required stuffs and perform analysis.
         </p><br/><br/>
 
-        <p align="justify">
-            Built with 🤍 by 
-            <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: grey;">Deepak Padhi</a> through 
-            <a href="https://www.linkedin.com/in/mrbriit/" style="text-decoration: none; color: grey;">Dr Bright --(Data Scientist)</a>
-        </p>
+       
 
         ''',unsafe_allow_html=True)  
 

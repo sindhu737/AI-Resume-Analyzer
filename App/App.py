@@ -213,11 +213,11 @@ def run():
                     PRIMARY KEY (ID)
                     );
                 """
-    cursor.execute(table_sql)
+      cursor.execute(table_sql)
 
 
-    DBf_table_name = 'user_feedback'
-    tablef_sql = "CREATE TABLE IF NOT EXISTS " + DBf_table_name + """
+      DBf_table_name = 'user_feedback'
+      tablef_sql = "CREATE TABLE IF NOT EXISTS " + DBf_table_name + """
                     (ID INT NOT NULL AUTO_INCREMENT,
                         feed_name varchar(50) NOT NULL,
                         feed_email VARCHAR(50) NOT NULL,
@@ -227,10 +227,10 @@ def run():
                         PRIMARY KEY (ID)
                     );
                 """
-    cursor.execute(tablef_sql)
+       cursor.execute(tablef_sql)
 
 
-    ###### CODE FOR CLIENT SIDE (USER) ######
+       ###### CODE FOR CLIENT SIDE (USER) ######
 
        if choice == 'User':
 

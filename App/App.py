@@ -129,48 +129,51 @@ st.set_page_config(
 
 
 def run():
-    
-    # (Logo, Heading, Sidebar etc)
-   # ---------- MODERN HEADER ----------
 
-st.markdown("""
-<h1 style='text-align:center; color:#4F46E5;'>
-🚀 AI Resume Analyzer
-</h1>
+    # ---------- MODERN HEADER ----------
 
-<p style='text-align:center; font-size:18px; color:gray;'>
-Upload your resume, get skill analysis, resume scoring,
-career recommendations and learning resources.
-</p>
+    st.markdown("""
+    <h1 style='text-align:center; color:#4F46E5;'>
+    🚀 AI Resume Analyzer
+    </h1>
 
-<hr>
-""", unsafe_allow_html=True)
+    <p style='text-align:center; font-size:18px; color:gray;'>
+    Upload your resume, get skill analysis, resume scoring,
+    career recommendations and learning resources.
+    </p>
 
-# ---------- SIDEBAR ----------
+    <hr>
+    """, unsafe_allow_html=True)
 
-st.sidebar.title("Navigation")
+    # ---------- SIDEBAR ----------
 
-activities = ["User", "Feedback", "About", "Admin"]
-choice = st.sidebar.radio(
-    "Select Section",
-    activities
-)
+    st.sidebar.title("Navigation")
 
-st.sidebar.markdown("---")
-st.sidebar.info(
-"""
-👩‍💻 Resume Analysis
+    activities = ["User", "Feedback", "About", "Admin"]
 
-📊 Resume Score
+    choice = st.sidebar.radio(
+        "Select Section",
+        activities
+    )
 
-🎯 Career Prediction
+    st.sidebar.markdown("---")
 
-📚 Course Recommendations
-"""
-)
+    st.sidebar.info(
+        """
+        👩‍💻 Resume Analysis
 
-st.sidebar.markdown("---")
-st.sidebar.caption("Developed by Sindhu Lasya")
+        📊 Resume Score
+
+        🎯 Career Prediction
+
+        📚 Course Recommendations
+        """
+    )
+
+    st.sidebar.markdown("---")
+    st.sidebar.caption("Developed by Sindhu Lasya")
+
+    ###### Creating Database and Table ######
 
     ###### Creating Database and Table ######
 
@@ -229,13 +232,17 @@ st.sidebar.caption("Developed by Sindhu Lasya")
 
     ###### CODE FOR CLIENT SIDE (USER) ######
 
-    if choice == 'User':
-        
-        # Collecting Miscellaneous Information
-       col1, col2 = st.columns(2)
+       if choice == 'User':
 
-with col1:
-    act_name = st.text_input("👤 Full Name")
+        col1, col2 = st.columns(2)
+
+        with col1:
+            act_name = st.text_input("👤 Full Name")
+
+        with col2:
+            act_mail = st.text_input("📧 Email")
+
+        act_mob = st.text_input("📱 Mobile Number")
 
 with col2:
     act_mail = st.text_input("📧 Email")
@@ -273,8 +280,8 @@ act_mob = st.text_input("📱 Mobile Number")
             pdf_name = pdf_file.name
             with open(save_image_path, "wb") as f:
                 f.write(pdf_file.getbuffer())
-            with st.expander("📄 View Uploaded Resume"):
-    show_pdf(save_image_path)
+           with st.expander("📄 View Uploaded Resume"):
+               show_pdf(save_image_path)
 
             ### parsing and extracting whole resume 
             resume_data = ResumeParser(save_image_path).get_extracted_data()
@@ -284,13 +291,11 @@ act_mob = st.text_input("📱 Mobile Number")
                 resume_text = pdf_reader(save_image_path)
 
                 ## Showing Analyzed data from (resume_data)
-               st.markdown("""
-## 📊 Resume Analysis Dashboard
-""")
-               st.success(
-    f"Welcome {resume_data['name']} 🎉"
-)
-               st.subheader("👤 Candidate Information")
+              st.markdown("## 📊 Resume Analysis Dashboard")
+
+              st.success(f"Welcome {resume_data['name']} 🎉")
+
+              st.subheader("👤 Candidate Information")
                 try:
                     st.text('Name: '+resume_data['name'])
                     st.text('Email: ' + resume_data['email'])

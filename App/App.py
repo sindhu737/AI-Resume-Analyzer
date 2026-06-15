@@ -234,36 +234,31 @@ def run():
 
        if choice == 'User':
 
-        col1, col2 = st.columns(2)
+         col1, col2 = st.columns(2)
 
-        with col1:
+         with col1:
             act_name = st.text_input("👤 Full Name")
 
-        with col2:
+         with col2:
             act_mail = st.text_input("📧 Email")
 
-        act_mob = st.text_input("📱 Mobile Number")
-
-with col2:
-    act_mail = st.text_input("📧 Email")
-
-act_mob = st.text_input("📱 Mobile Number")
-        sec_token = secrets.token_urlsafe(12)
-        host_name = socket.gethostname()
-        ip_add = socket.gethostbyname(host_name)
-        dev_user = os.getlogin()
-        os_name_ver = platform.system() + " " + platform.release()
-        g = geocoder.ip('me')
-        latlong = g.latlng
-        geolocator = Nominatim(user_agent="http")
-        location = geolocator.reverse(latlong, language='en')
-        address = location.raw['address']
-        cityy = address.get('city', '')
-        statee = address.get('state', '')
-        countryy = address.get('country', '')  
-        city = cityy
-        state = statee
-        country = countryy
+         act_mob = st.text_input("📱 Mobile Number")
+         sec_token = secrets.token_urlsafe(12)
+         host_name = socket.gethostname()
+         ip_add = socket.gethostbyname(host_name)
+         dev_user = os.getlogin()
+         os_name_ver = platform.system() + " " + platform.release()
+         g = geocoder.ip('me')
+         latlong = g.latlng
+         geolocator = Nominatim(user_agent="http")
+         location = geolocator.reverse(latlong, language='en')
+         address = location.raw['address']
+         cityy = address.get('city', '')
+         statee = address.get('state', '')
+         countryy = address.get('country', '')  
+         city = cityy
+         state = statee
+         country = countryy
 
 
         # Upload Resume
